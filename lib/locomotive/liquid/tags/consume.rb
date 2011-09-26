@@ -23,6 +23,7 @@ module Locomotive
             markup.scan(::Liquid::TagAttributes) do |key, value|
               @options[key] = value if key != 'http'
             end
+            @options[:format] = @options[:format].to_sym if @options[:format]
             @expires_in = (@options.delete('expires_in') || 0).to_i
             @cache_key = Digest::SHA1.hexdigest(@target)
           else
